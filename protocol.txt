@@ -1,0 +1,7 @@
+202 - Upload to server
+205 - Download from server
+250 - disconnect
+
+301 - server finished
+302 - server ready
+303 - begin transfer
