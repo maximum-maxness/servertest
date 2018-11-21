@@ -18,22 +18,30 @@ public class Runner {
         server.start();
         int i = 0;
         while (i < 1) {
-
             try {
                 int command = Integer.parseInt(server.getNextLine());
 
                 switch (command) {
-                    case 202:
-                        server.sendLine("302");
+                    case 202: //Upload to server
+                        System.out.println("Upload from client.");
+                        server.sendLine("302"); //Server Ready
                         text = server.getNextLine();
-                        server.sendLine("301");
+                        System.out.println("Recieved line: " + text);
+                        if (server.getNextLine() == "206") {
+                            server.sendLine("301"); //Server Finished
+                            System.out.println("Done");
+                        } else {
+                            System.out.println("Client didn't reply with finished upload...");
+                        }
                         break;
-                    case 205:
-                        server.sendLine("303");
+                    case 205: //Download from Server
+                        System.out.println("Download to client");
+                        server.sendLine("303"); //Begin Transfer
                         server.sendLine(text);
-                        server.sendLine("301");
+                        System.out.println("Sent: " + text);
+                        server.sendLine("301"); //Server Finished
                         break;
-                    case 250:
+                    case 250: //Disconnect
                         server.stop();
                         break;
                 }

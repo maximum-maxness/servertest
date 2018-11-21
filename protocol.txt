@@ -1,5 +1,6 @@
 202 - Upload to server
 205 - Download from server
+206 - finished transfer
 250 - disconnect
 
 301 - server finished
