@@ -27,13 +27,16 @@ public class Runner {
                         server.sendLine("302"); //Server Ready
                         text = server.getNextLine();
                         System.out.println("Recieved line: " + text);
-                        if ("206".equals(server.getNextLine())) {
+                        String reply1 = server.getNextLine();
+                        System.out.println("Is 206?:" + (reply1.equals("206")));
+                        if (reply1.equals("206")) {
                             server.sendLine("301"); //Server Finished
                             System.out.println("Done");
                         } else {
                             System.out.println("Client didn't reply with finished upload...");
                         }
                         break;
+
                     case 205: //Download from Server
                         System.out.println("Download to client");
                         server.sendLine("303"); //Begin Transfer

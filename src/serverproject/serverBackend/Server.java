@@ -48,14 +48,21 @@ public class Server {
 
     public String getNextLine() throws IOException {
         Scanner socketScanner = new Scanner(this.socket.getInputStream());
-        String reply = socketScanner.nextLine();
-        System.out.println("Received Reply: " + reply);
-        return reply;
+        boolean b = true;
+        while (b) {
+            String reply = socketScanner.nextLine();
+            System.out.println("Received Reply: \"" + reply + "\"");
+            if (reply != null) {
+                b = false;
+                return reply;
+            }
+        }
+        return null;
     }
 
     public void sendLine(String text) throws IOException {
         PrintStream printStream = new PrintStream(this.socket.getOutputStream());
         printStream.println(text);
-        System.out.println("Sent :" + text);
+        System.out.println("Sent : \"" + text + "\"");
     }
 }
