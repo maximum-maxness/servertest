@@ -6,7 +6,7 @@ import serverproject.serverBackend.Server;
 
 public class Runner {
 
-    String text;
+    String text = "this is text";
 
     public static void main(String args[]) throws IOException {
         Runner server = new Runner();
@@ -27,7 +27,7 @@ public class Runner {
                         server.sendLine("302"); //Server Ready
                         text = server.getNextLine();
                         System.out.println("Recieved line: " + text);
-                        if (server.getNextLine() == "206") {
+                        if ("206".equals(server.getNextLine())) {
                             server.sendLine("301"); //Server Finished
                             System.out.println("Done");
                         } else {
